@@ -24,12 +24,16 @@ var server=http.createServer((function(request,response)
 		    const resData = JSON.parse(data);
 		    console.log(resData.length);
 
-		    let repoName = 'List Repo : <br><br>';
-
+		    let repoName = '<b>List Repo :</b> <br><br>';
+		    repoName += '<table>';
+		    repoName += '<tr><td>ID</td><td>Repo Name</td><td>Download</td></tr>';
 		    for (var i = 0; i < resData.length; i++) {
-		    	//console.log(resData[i].name);
-		    	repoName += resData[i].name + '<br>';
+		    	repoName += '<tr>';
+		    	repoName += '<td>' +resData[i].id + '</td><td> ' + resData[i].name + ' </td>';
+		    	repoName += '<td><a href="https://github.com/:username/' + resData[i].name + '/archive/master.zip"> Download </a></td>';
+		    	repoName += '</tr>';
 		    }
+		    repoName += '</table>';
 		    response.end(repoName);
 		});
 	});
